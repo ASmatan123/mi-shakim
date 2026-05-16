@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>מי-שחקים - אתר משחקים לילדים</title>
 
-<meta name="description" content="מי-שחקים – אתר לילדים עם משחקים כמו Scratch ו-2D Minecraft. חפשו 'מי-שחקים', 'מי שחקים' או 'mi-shakim' כדי למצוא אותנו בגוגל.">
+<meta name="description" content="מי-שחקים – אתר לילדים עם משחקי HTML5 פופולריים כמו Scratch, מריו, גאומטרי דאש, פלאפי בירד ו-2D Minecraft במסך מלא ובחינם!">
 
 <style>
 body {
@@ -29,7 +29,11 @@ nav {
     margin:20px 0;
 }
 
-nav button {
+/* הפכנו את הכפתורים לקישורים אמיתיים (A) בשביל גוגל */
+nav a {
+    display: inline-block;
+    text-decoration: none;
+    color: #000;
     margin: 5px;
     padding:10px 20px;
     font-size:1em;
@@ -41,7 +45,7 @@ nav button {
     transition: transform 0.2s, background 0.2s;
 }
 
-nav button:hover {
+nav a:hover {
     transform:scale(1.1);
     background:#ffe680;
 }
@@ -128,6 +132,17 @@ footer {
     margin-top: 8px;
     font-weight:bold;
 }
+
+/* טקסט הסבר שיעזור לגוגל לקרוא תוכן באתר */
+.game-info {
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    display: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 </style>
 </head>
 
@@ -139,10 +154,11 @@ footer {
 </header>
 
 <nav>
-    <button onclick="loadGame('mar')">מריו הראשון</button>
-    <button onclick="loadGame('dash')">גאומטרי דאש</button>
-    <button onclick="loadGame('flappy')">Flappy Bird</button>
-    <button onclick="loadGame('minecraft2d')">2D Minecraft</button>
+    <!-- שינוי לקישורי href עם # כדי שגוגל יבין שיש פה לאן לנווט, והוספת הטקסטים שיסרקו -->
+    <a href="#mario" onclick="loadGame('mar')">מריו הראשון</a>
+    <a href="#geometry-dash" onclick="loadGame('dash')">גאומטרי דאש</a>
+    <a href="#flappy-bird" onclick="loadGame('flappy')">Flappy Bird</a>
+    <a href="#minecraft-2d" onclick="loadGame('minecraft2d')">2D Minecraft</a>
 </nav>
 
 <div id="gameContainer">
@@ -152,8 +168,11 @@ footer {
     <br>
 
     <button id="scratchFullBtn" onclick="goFullScreen()">
-        מסך מלא
+        מסך מלא 📺
     </button>
+
+    <!-- אזור טקסט דינמי עבור גוגל והמשתמשים -->
+    <div id="gameDescription" class="game-info"></div>
 
 </div>
 
@@ -165,134 +184,94 @@ footer {
 <!-- מודאל התחברות -->
 <div id="loginModal">
   <div id="loginBox">
-
     <h3>התחברות</h3>
-
     <input id="email" type="text" placeholder="שם@שם_הארגון.סיומת">
-
     <input id="password" type="password" placeholder="סיסמה">
-
     <button onclick="login()">התחבר</button>
-
     <div id="loginMsg"></div>
-
     <br>
-
-    <button onclick="closeLogin()" style="background:#ff5555;">
-        סגור
-    </button>
-
+    <button onclick="closeLogin()" style="background:#ff5555;">סגור</button>
   </div>
 </div>
 
 <script>
-
-let currentURL = "";
-
 // טעינת משחקים
 function loadGame(game){
-
     const frame = document.getElementById('gameFrame');
-
+    const descBox = document.getElementById('gameDescription');
+    
     frame.style.display='block';
-
+    descBox.style.display='block';
     document.getElementById('scratchFullBtn').style.display='inline-block';
 
-    // מריו
     if(game==='mar'){
         frame.src='https://scratch.mit.edu/projects/425822460/embed';
-        currentURL='https://scratch.mit.edu/projects/425822460/fullscreen/';
+        descBox.innerHTML = "<h3>משחק סופר מריו הראשון אונליין</h3><p>שחקו במשחק הנוסטלגי והאהוב מריו ברוס (Mario Bros) ישירות בדפדפן בגרסת קוד פתוח מסקראץ'. השתמשו בחצים כדי לזוז ולקפוץ!</p>";
     }
-
-    // גאומטרי דאש
     if(game==='dash'){
         frame.src='https://scratch.mit.edu/projects/480441937/embed';
-        currentURL='https://scratch.mit.edu/projects/480441937/fullscreen/';
+        descBox.innerHTML = "<h3>משחק גאומטרי דאש במסך מלא</h3><p>שחקו עכשיו בשלושת השלבים הראשונים של גיאומטרי דאש (Geometry Dash) המקורי. משחק קצב מאתגר במיוחד המותאם למחשב ולנייד.</p>";
     }
-
-    // פלאפי בירד
     if(game==='flappy'){
         frame.src='https://scratch.mit.edu/projects/17432735/embed';
-        currentURL='https://scratch.mit.edu/projects/17432735/fullscreen/';
+        descBox.innerHTML = "<h3>משחק פלאפי בירד (Flappy Bird)</h3><p>המשחק הממכר ששבר את הרשת! עזרו לציפור לעבור בין הצינורות בלי לפגוע בהם. לחצו על הרווח או העכבר כדי לעוף.</p>";
     }
-
-    // 2D Minecraft
     if(game==='minecraft2d'){
         frame.src='https://scratch.mit.edu/projects/10549379/embed';
-        currentURL='https://scratch.mit.edu/projects/10549379/fullscreen/';
+        descBox.innerHTML = "<h3>משחק מיינקראפט דו מימד (2D Minecraft)</h3><p>גרסת הסקראץ' המטורפת של מיינקראפט בדו מימד! חצבו בלוקים, בנו עולמות ושחררו את היצירתיות שלכם אונליין.</p>";
     }
 }
 
-// מסך מלא
+// תיקון פונקציית מסך מלא - שימוש בקידוד דפדפן תקני שלא מוציא את הגולש מהאתר שלך!
 function goFullScreen(){
-
-    if(currentURL){
-
-        window.location.href = currentURL;
-
+    const frame = document.getElementById('gameFrame');
+    if (frame.requestFullscreen) {
+        frame.requestFullscreen();
+    } else if (frame.webkitRequestFullscreen) { /* Safari */
+        frame.webkitRequestFullscreen();
+    } else if (frame.msRequestFullscreen) { /* IE11 */
+        frame.msRequestFullscreen();
     }
 }
 
-// התחברות
+// בדיקת קישור ישיר בטעינת העמוד (אם מישהו נכנס עם #)
+window.addEventListener('DOMContentLoaded', () => {
+    const hash = window.location.hash;
+    if(hash === '#mario') loadGame('mar');
+    if(hash === '#geometry-dash') loadGame('dash');
+    if(hash === '#flappy-bird') loadGame('flappy');
+    if(hash === '#minecraft-2d') loadGame('minecraft2d');
+});
+
+// לוגיקת התחברות
 let loggedInName = "";
-
-function openLogin(){
-
-    document.getElementById('loginModal').style.display='flex';
-
-}
-
-function closeLogin(){
-
-    document.getElementById('loginModal').style.display='none';
-
-}
-
+function openLogin(){ document.getElementById('loginModal').style.display='flex'; }
+define=null;
+function closeLogin(){ document.getElementById('loginModal').style.display='none'; }
 function login(){
-
     const email=document.getElementById('email').value.trim();
-
     const msg=document.getElementById('loginMsg');
-
     const re=/^([^\s@]+)@([^\s@]+\.(com|co\.il|org))$/i;
-
     const match=email.match(re);
-
     if(!match){
-
         msg.innerHTML="❌ כתובת לא חוקית (שם@שם_הארגון.סיומת)";
-
         msg.style.color="red";
-
         return;
     }
-
     loggedInName = match[1];
-
     msg.innerHTML="✅ שלום " + loggedInName + "!";
-
     msg.style.color="green";
-
     const btn = document.getElementById('loginBtn');
-
     btn.innerText = "התנתקות " + loggedInName;
-
     btn.onclick = logout;
-
     setTimeout(closeLogin,1200);
 }
-
 function logout(){
-
     loggedInName = "";
-
     const btn = document.getElementById('loginBtn');
-
     btn.innerText = "התחבר";
-
     btn.onclick = openLogin;
 }
-
 </script>
 
 </body>

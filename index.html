@@ -5,188 +5,295 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>מי-שחקים - אתר משחקים לילדים</title>
 
-<!-- תיאור לגוגל -->
-<meta name="description" content="מי-שחקים – אתר לילדים עם משחקים כמו Scratch, Yo-Yoo ו-Minecraft. חפשו 'מי-שחקים', 'מי שחקים' או 'mi-shakim' כדי למצוא אותנו בגוגל.">
+<meta name="description" content="מי-שחקים – אתר לילדים עם משחקים כמו Scratch ו-2D Minecraft. חפשו 'מי-שחקים', 'מי שחקים' או 'mi-shakim' כדי למצוא אותנו בגוגל.">
 
 <style>
-body { font-family: Arial, sans-serif; background: #87ceeb; margin:0; padding:0; text-align:center;}
-header { background:#ffcc00; padding:20px; font-size:2em; font-weight:bold; box-shadow:0 4px 6px rgba(0,0,0,0.2); position: relative;}
-nav { margin:20px 0;}
-nav button { margin: 5px; padding:10px 20px; font-size:1em; border:none; border-radius:8px; background:#fff; cursor:pointer; box-shadow:0 2px 4px rgba(0,0,0,0.2); transition: transform 0.2s, background 0.2s;}
-nav button:hover { transform:scale(1.1); background:#ffe680; }
+body {
+    font-family: Arial, sans-serif;
+    background: #87ceeb;
+    margin:0;
+    padding:0;
+    text-align:center;
+}
 
-#gameContainer { margin: 20px auto; width: 90%; }
-iframe { width:100%; height:600px; border:4px solid #ffcc00; border-radius:12px; display:none; }
+header {
+    background:#ffcc00;
+    padding:20px;
+    font-size:2em;
+    font-weight:bold;
+    box-shadow:0 4px 6px rgba(0,0,0,0.2);
+    position: relative;
+}
 
-.yoYoPlaceholder { background:#fff; border:4px solid #ffcc00; border-radius:12px; height:600px; display:flex; flex-direction:column; justify-content:center; align-items:center; margin-bottom:40px; }
-.yoYoPlaceholder button { margin-top:20px; padding:10px 20px; background:#ff6600; color:#fff; font-weight:bold; border:none; border-radius:8px; cursor:pointer; }
+nav {
+    margin:20px 0;
+}
 
-#minecraftContainer { display:none; flex-direction:column; align-items:center; justify-content:center; background:#fff; border:4px solid #4CAF50; border-radius:12px; padding:20px; margin-bottom:40px; }
-#minecraftContainer button { margin:5px; padding:10px 20px; background:#4CAF50; color:#fff; border:none; border-radius:8px; cursor:pointer; }
+nav button {
+    margin: 5px;
+    padding:10px 20px;
+    font-size:1em;
+    border:none;
+    border-radius:8px;
+    background:#fff;
+    cursor:pointer;
+    box-shadow:0 2px 4px rgba(0,0,0,0.2);
+    transition: transform 0.2s, background 0.2s;
+}
 
-#minecraftControls { margin-top: 10px; }
-#minecraftControls button { background:#007BFF; color:#fff; margin:5px; padding:8px 16px; border:none; border-radius:6px; cursor:pointer; }
+nav button:hover {
+    transform:scale(1.1);
+    background:#ffe680;
+}
 
-#scratchFullBtn { background:#FF5733; color:#fff; padding:8px 16px; border:none; border-radius:6px; cursor:pointer; margin-top:10px; display:none; }
+#gameContainer {
+    margin: 20px auto;
+    width: 90%;
+}
 
-footer { margin:20px 0; font-size:0.8em; color:#555; }
+iframe {
+    width:100%;
+    height:600px;
+    border:4px solid #ffcc00;
+    border-radius:12px;
+    display:none;
+}
 
-#loginBtn { position: absolute; top: 10px; left: 10px; padding: 6px 12px; border: none; border-radius: 6px; background: #007BFF; color: white; cursor: pointer; font-size: 0.9em; }
-#loginModal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 999; }
-#loginBox { background: white; padding: 20px; border-radius: 12px; width: 300px; text-align: center; }
-#loginBox input { width: 90%; padding: 8px; margin: 6px 0; }
-#loginBox button { margin-top: 10px; padding: 8px 16px; background: #4CAF50; border: none; border-radius: 6px; color: white; cursor: pointer; }
-#loginMsg { margin-top: 8px; font-weight:bold; }
+#scratchFullBtn {
+    background:#FF5733;
+    color:#fff;
+    padding:8px 16px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    margin-top:10px;
+    display:none;
+}
+
+footer {
+    margin:20px 0;
+    font-size:0.6em;
+    color:#999;
+    opacity:0.5;
+}
+
+#loginBtn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    background: #007BFF;
+    color: white;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+#loginModal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+#loginBox {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    width: 300px;
+    text-align: center;
+}
+
+#loginBox input {
+    width: 90%;
+    padding: 8px;
+    margin: 6px 0;
+}
+
+#loginBox button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background: #4CAF50;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+#loginMsg {
+    margin-top: 8px;
+    font-weight:bold;
+}
 </style>
 </head>
+
 <body>
+
 <header>
 מי-שחקים
 <button id="loginBtn" onclick="openLogin()">התחבר</button>
 </header>
 
 <nav>
-    <!-- Scratch -->
-    <button onclick="loadScratch('mar')">מריו הראשון</button>
-    <button onclick="loadScratch('dash')">גאומטרי דאש</button>
-    <button onclick="loadScratch('flappy')">Flappy Bird</button>
-
-    <!-- Yo-Yoo -->
-    <button onclick="loadYoYo('https://games.yo-yoo.co.il/games_play.php?game=1836')">בן האש ובת המים</button>
-    <button onclick="loadYoYo('https://games.yo-yoo.co.il/games_play.php?game=5920')">סימולטור איש העכביש</button>
-
-    <!-- Minecraft / EagleCraft -->
-    <button onclick="loadMinecraft()">Minecraft</button>
+    <button onclick="loadGame('mar')">מריו הראשון</button>
+    <button onclick="loadGame('dash')">גאומטרי דאש</button>
+    <button onclick="loadGame('flappy')">Flappy Bird</button>
+    <button onclick="loadGame('minecraft2d')">2D Minecraft</button>
 </nav>
 
 <div id="gameContainer">
-    <!-- Scratch -->
-    <iframe id="scratchFrame" allowfullscreen title="Scratch משחק"></iframe>
-    <button id="scratchFullBtn" onclick="scratchFullScreen()">מסך מלא</button>
 
-    <!-- Yo-Yoo -->
-    <div id="yoYoContainer" class="yoYoPlaceholder">
-        <div>המשחק נטען רק ב‑Yo-Yoo</div>
-        <p>תיאור: כאן אפשר לשחק במשחקים של Yo-Yoo בכיף. חפשו 'מי-שחקים', 'מי שחקים' או 'mi-shakim' כדי למצוא אותנו בגוגל.</p>
-        <button id="yoYoButton">הפעל את Yo-Yoo</button>
-    </div>
+    <iframe id="gameFrame" allowfullscreen title="משחק"></iframe>
 
-    <!-- Minecraft -->
-    <div id="minecraftContainer">
-        <div>בחר גרסה לשחק:</div>
-        <button onclick="loadMinecraftVersion('1.12')">גרסה 1.12</button>
-        <button onclick="loadMinecraftVersion('1.8')">גרסה 1.8</button>
-        <div id="minecraftControls">
-            <button onclick="minecraftFullScreen()">מסך מלא</button>
-        </div>
-        <iframe id="minecraftFrame" allowfullscreen title="Minecraft משחק" style="width:100%; height:600px; border:4px solid #4CAF50; border-radius:12px; display:none;"></iframe>
-        <p>תיאור: שחק Minecraft באינטרנט ישירות מהדפדפן! מתאים לילדים ולמתחילים. חפשו 'מי-שחקים', 'מי שחקים' או 'mi-shakim'.</p>
-    </div>
+    <br>
+
+    <button id="scratchFullBtn" onclick="goFullScreen()">
+        מסך מלא
+    </button>
+
 </div>
 
 <footer>
-© כל הזכויות שמורות מתן אסיסקוביץ  
+© כל הזכויות שמורות מתן אסיסקוביץ
 <p>חפשו בגוגל: מי-שחקים, מי שחקים, mi-shakim</p>
 </footer>
 
 <!-- מודאל התחברות -->
 <div id="loginModal">
   <div id="loginBox">
+
     <h3>התחברות</h3>
+
     <input id="email" type="text" placeholder="שם@שם_הארגון.סיומת">
+
     <input id="password" type="password" placeholder="סיסמה">
+
     <button onclick="login()">התחבר</button>
+
     <div id="loginMsg"></div>
+
     <br>
-    <button onclick="closeLogin()" style="background:#ff5555;">סגור</button>
+
+    <button onclick="closeLogin()" style="background:#ff5555;">
+        סגור
+    </button>
+
   </div>
 </div>
 
 <script>
-// Scratch
-function loadScratch(game){
-    document.getElementById('yoYoContainer').style.display='none';
-    document.getElementById('minecraftContainer').style.display='none';
-    document.getElementById('minecraftFrame').style.display='none';
-    document.getElementById('scratchFrame').style.display='block';
+
+let currentURL = "";
+
+// טעינת משחקים
+function loadGame(game){
+
+    const frame = document.getElementById('gameFrame');
+
+    frame.style.display='block';
+
     document.getElementById('scratchFullBtn').style.display='inline-block';
 
-    if(game==='mar') document.getElementById('scratchFrame').src='https://scratch.mit.edu/projects/425822460/embed';
-    if(game==='dash') document.getElementById('scratchFrame').src='https://scratch.mit.edu/projects/480441937/embed';
-    if(game==='flappy') document.getElementById('scratchFrame').src='https://scratch.mit.edu/projects/17432735/embed';
+    // מריו
+    if(game==='mar'){
+        frame.src='https://scratch.mit.edu/projects/425822460/embed';
+        currentURL='https://scratch.mit.edu/projects/425822460/fullscreen/';
+    }
+
+    // גאומטרי דאש
+    if(game==='dash'){
+        frame.src='https://scratch.mit.edu/projects/480441937/embed';
+        currentURL='https://scratch.mit.edu/projects/480441937/fullscreen/';
+    }
+
+    // פלאפי בירד
+    if(game==='flappy'){
+        frame.src='https://scratch.mit.edu/projects/17432735/embed';
+        currentURL='https://scratch.mit.edu/projects/17432735/fullscreen/';
+    }
+
+    // 2D Minecraft
+    if(game==='minecraft2d'){
+        frame.src='https://scratch.mit.edu/projects/10549379/embed';
+        currentURL='https://scratch.mit.edu/projects/10549379/fullscreen/';
+    }
 }
 
-function scratchFullScreen(){
-    const url = document.getElementById('scratchFrame').src;
-    if(url) window.location.href = url;
-}
+// מסך מלא
+function goFullScreen(){
 
-// Yo-Yoo
-function loadYoYo(url){
-    document.getElementById('scratchFrame').style.display='none';
-    document.getElementById('scratchFullBtn').style.display='none';
-    document.getElementById('yoYoContainer').style.display='flex';
-    document.getElementById('minecraftContainer').style.display='none';
-    document.getElementById('minecraftFrame').style.display='none';
-    document.getElementById('yoYoButton').onclick=function(){window.open(url,'_blank');}
-}
+    if(currentURL){
 
-// Minecraft / EagleCraft
-let currentMinecraftURL='';
-function loadMinecraft(){
-    document.getElementById('scratchFrame').style.display='none';
-    document.getElementById('scratchFullBtn').style.display='none';
-    document.getElementById('yoYoContainer').style.display='none';
-    document.getElementById('minecraftContainer').style.display='flex';
-}
+        window.location.href = currentURL;
 
-function loadMinecraftVersion(version){
-    const frame=document.getElementById('minecraftFrame');
-    if(version==='1.12'){ frame.src='https://eaglercraft.q13x.com/1.12.2/js/?retina=true'; currentMinecraftURL=frame.src; }
-    if(version==='1.8'){ frame.src='https://eaglercraft.q13x.com/1.8.8/js/?retina=true'; currentMinecraftURL=frame.src; }
-    frame.style.display='block';
-}
-
-function minecraftFullScreen(){
-    if(currentMinecraftURL) window.location.href=currentMinecraftURL;
-    else alert("בחר גרסה לפני מסך מלא");
+    }
 }
 
 // התחברות
 let loggedInName = "";
-function openLogin(){ document.getElementById('loginModal').style.display='flex'; }
-function closeLogin(){ document.getElementById('loginModal').style.display='none'; }
+
+function openLogin(){
+
+    document.getElementById('loginModal').style.display='flex';
+
+}
+
+function closeLogin(){
+
+    document.getElementById('loginModal').style.display='none';
+
+}
 
 function login(){
+
     const email=document.getElementById('email').value.trim();
+
     const msg=document.getElementById('loginMsg');
 
     const re=/^([^\s@]+)@([^\s@]+\.(com|co\.il|org))$/i;
+
     const match=email.match(re);
 
     if(!match){
-        msg.innerHTML="❌ כתובת לא חוקית (שם@שם_ארגון.סיומת)";
+
+        msg.innerHTML="❌ כתובת לא חוקית (שם@שם_הארגון.סיומת)";
+
         msg.style.color="red";
+
         return;
     }
 
     loggedInName = match[1];
+
     msg.innerHTML="✅ שלום " + loggedInName + "!";
+
     msg.style.color="green";
 
     const btn = document.getElementById('loginBtn');
+
     btn.innerText = "התנתקות " + loggedInName;
+
     btn.onclick = logout;
 
     setTimeout(closeLogin,1200);
 }
 
 function logout(){
+
     loggedInName = "";
+
     const btn = document.getElementById('loginBtn');
+
     btn.innerText = "התחבר";
+
     btn.onclick = openLogin;
 }
+
 </script>
+
 </body>
 </html>
